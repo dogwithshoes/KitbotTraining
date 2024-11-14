@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class DriveCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final frc.robot.subsystems.Drive drive;
-  private double rotate;
+  private int rotate;
   private double power;
 
-  public DriveCommand(Drive drive, double rotate, double power) {
+  public DriveCommand(Drive drive, int rotate, double power) {
     this.drive = drive;
     this.rotate = rotate;
     this.power = power;
@@ -35,6 +35,9 @@ public class DriveCommand extends Command {
     double leftSpeed = power + rotate;
     double rightSpeed = power - rotate;
     drive.setPower(leftSpeed, rightSpeed);
+
+    System.out.println(power);
+    System.out.println(rotate);
   }
 
   // Called once the command ends or is interrupted.

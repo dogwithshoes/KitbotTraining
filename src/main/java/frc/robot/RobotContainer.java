@@ -13,23 +13,30 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
 
   private final CommandXboxController driver = new CommandXboxController(0);
-  // The robot's subsystems and commands are defined here...
+  
+
   private final Drive m_drive = new Drive();
-  private final int rotationAxis = XboxController.Axis.kLeftY.value;
-  private final double forwardAxis = driver.getLeftY();
+  private int rotationAxis = XboxController.Axis.kLeftX.value;
+  private int forwardAxis = XboxController.Axis.kRightY.value;
+  
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
   
-    m_drive.setDefaultCommand(new DriveCommand(m_drive, 0, 0.1));
-  }
 
+    m_drive.setDefaultCommand(
+      new DriveCommand(
+        m_drive, 
+        (int) -driver.getRawAxis(rotationAxis),
+        (double) -driver.getRawAxis(forwardAxis)
+        ));
+   }
+
+   
+ 
   private void configureBindings() {
-    // driver.rightTrigger().whileTrue(new DriveCommand(m_drive, rotationAxis, driveForward));
-    // driver.leftTrigger().whileTrue(new DriveCommand(m_drive, rotationAxis, driveBackwards));
-
     
   }
 
