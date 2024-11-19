@@ -8,6 +8,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.units.Power;
 import edu.wpi.first.wpilibj.DutyCycle;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -19,6 +20,7 @@ public class Drive extends SubsystemBase {
     private TalonFX motorBL;
 
     private DutyCycleOut powerRequest = new DutyCycleOut(0);
+    private final DifferentialDrive m_setPower = new DifferentialDrive(motorFR :: set, motorFL :: set);
   
   public Drive() {
     motorFR = new TalonFX(Constants.DriveConstants.frontRightID);
@@ -33,9 +35,10 @@ public class Drive extends SubsystemBase {
     motorBL.setControl(new StrictFollower(motorFL.getDeviceID()));
   }
 
-  public void setPower(double powerLeft, double powerRight){
-    motorFR.setControl(powerRequest.withOutput(powerRight));
-    motorFL.setControl(powerRequest.withOutput(powerLeft));
+  public void setPower(double rotate, double power){
+    // motorFR.setControl(powerRequest.withOutput(powerRight));
+    // motorFL.setControl(powerRequest.withOutput(powerLeft));
+    m_setPower.arcadeDrive(rotate, power);
   }
 
   /**

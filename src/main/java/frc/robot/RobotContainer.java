@@ -16,8 +16,6 @@ public class RobotContainer {
   
 
   private final Drive m_drive = new Drive();
-  private int rotationAxis = XboxController.Axis.kLeftX.value;
-  private int forwardAxis = XboxController.Axis.kRightY.value;
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -29,12 +27,10 @@ public class RobotContainer {
     m_drive.setDefaultCommand(
       new DriveCommand(
         m_drive, 
-        (int) -driver.getRawAxis(rotationAxis),
-        (double) -driver.getRawAxis(forwardAxis)
+        -driver.getLeftX(),
+        -driver.getRightY()
         ));
    }
-
-   
  
   private void configureBindings() {
     
